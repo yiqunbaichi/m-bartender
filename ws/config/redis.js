@@ -1,7 +1,8 @@
 var redisdb = {}
 var redis = require('redis'),
   RDS_PORT = 6379,
-  RDS_HOST = '10.211.55.8',
+  // RDS_HOST = '10.211.55.8',
+  RDS_HOST = '127.0.0.1',
   RDS_PWD = 'rd@rio',
   RDS_OPTS = {},
   client = redis.createClient(RDS_PORT, RDS_HOST, RDS_OPTS)

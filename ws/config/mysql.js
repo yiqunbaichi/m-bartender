@@ -2,7 +2,8 @@ var mysql = require('mysql')
 
 var pool = mysql.createPool({
   connectionLimit: 10,
-  host: '10.211.55.8',
+  // host: '10.211.55.8',
+  host: '127.0.0.1',
   user: 'wxapp_com',
   password: 'wxappcompany',
   port: '3306',
