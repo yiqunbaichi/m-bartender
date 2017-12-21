@@ -2,9 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/store'
 import * as types from '../store/types'
-
 Vue.use(Router)
-
 const routes = [
   {
     path: '/bartender',
@@ -12,7 +10,7 @@ const routes = [
     component: resolve => require(['../components/pages/terminal/Device.vue'], resolve)
   },
   {
-    path: '/pages',
+    path: '/bartender/pages',
     name: 'pages',
     component: resolve => require(['../components/TabberMenu.vue'], resolve),
     children: [{
