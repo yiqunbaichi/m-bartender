@@ -1,13 +1,13 @@
 {
   "apps": [
     {
-      "name": "m-bartender-ws",
-      "cwd": "../ws",
-      "script": "server.js",
+      "name": "m-bartender-web",
+      "cwd": "../build",
+      "script": "dev-server.js",
       "log_date_format": "YYYY-MM-DD HH:mm Z",
-      "error_file": "../../logs/ws-app.stderr.log",
-      "out_file": "../../logs/ws-app.stdout.log",
-      "pid_file": "../../pids/ws-geo-api.pid",
+      "error_file": "../../logs/mbweb-app.stderr.log",
+      "out_file": "../../logs/mbweb-app.stdout.log",
+      "pid_file": "../../pids/mbweb-geo-api.pid",
       "instances": 1,
       "min_uptime": "200s",
       "max_restarts": 10,
