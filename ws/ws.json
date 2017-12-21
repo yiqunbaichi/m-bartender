@@ -6,7 +6,7 @@
       "script": "server.js",
       "log_date_format": "YYYY-MM-DD HH:mm Z",
       "error_file": "../../logs/node-app.stderr.log",
-      "out_file": "../../logs/node-app.stdout.log",
+      "out_file": "../../logs/ws-app.stdout.log",
       "pid_file": "../../pids/node-geo-api.pid",
       "instances": 1,
       "min_uptime": "200s",
