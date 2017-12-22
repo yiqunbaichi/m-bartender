@@ -6,7 +6,8 @@ import router from './router'
 // axios 配置
 axios.defaults.timeout = 5000
 // axios.defaults.baseURL = 'http://api.riowine.com:8070'
-axios.defaults.baseURL = 'http://192.168.0.102:8781/'
+axios.defaults.baseURL = 'http://localhost:8781/'
+
 // http request 拦截器
 axios.interceptors.request.use(
   config => {
