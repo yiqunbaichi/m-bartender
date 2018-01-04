@@ -18,26 +18,24 @@ var ws_b_config = require('../../config/wsBartenderConfig')
   // });
 
 router.get('/ttt', function (req, res, next) {
-  // redisdb.geoadd(ws_b_config.tb_bartender_poslist, '120.10782', '30.298348', '10001', function (err, result) {
-  // })
-  res.send(rm.getSuccessRM('', '0'))
+  let id= '10000'
+  redisdb.geoadd(ws_b_config.tb_bartender_poslist, '121.612268', '31.153835', id, function (err, result) {
+  })
+  // res.send(rm.getSuccessRM('', '0'))
 
-  // let v = {
-  //   terminalId: '10001',
-  //   name: '第二台home版',
-  //   imageUrl: 'http://api.riowine.com:8070/brp/photo/robot/product/R019/1508838552987.png',
-  //   address: '康桥东路538号 2楼',
-  //   tel: '0571-198771'
-  // }
-  // redisdb.set(ws_b_config.tb_bartender_detail + '10001', JSON.stringify(v), 0, function (err, result) {
-  //   if (!err) {
-  //     res.send(rm.getRM(200, 'success', result))
-  //   }
-  // })
+  let v = {
+    terminalId: id,
+    name: '第一台机器',
+    imageUrl: 'http://api.riowine.com:8070/brp/photo/robot/product/R019/1508838552987.png',
+    address: '康桥东路538号 1楼',
+    tel: '0571-198771'
+  }
+  redisdb.set(ws_b_config.tb_bartender_detail + id, JSON.stringify(v), 0, function (err, result) {
+    if (!err) {
+        res.send(rm.getSuccessRM('', 'success'))
 
-  // redisdb.get(ws_b_config.bartnder_list + terminalId, function (result) {
-  //   res.send(rm.getRM(200, 'success', result))
-  // })
+    }
+  })
 })
 router.get('/terminalInfo', function (req, res, next) {
   let terminalId = req.query.terminalId
@@ -48,7 +46,7 @@ router.get('/terminalInfo', function (req, res, next) {
       res.send(rm.getSuccessRM('', result))
     })
   } else if (!isNaN(longitude) && !isNaN(latitude)) { // 查询附近终端
-    redisdb.georadius(ws_b_config.tb_bartender_poslist, longitude, latitude, 5, 'km', function (err, result) {
+    redisdb.georadius(ws_b_config.tb_bartender_poslist, longitude, latitude, 50, 'km', function (err, result) {
       if (result.length > 0) {
         let resultJson = []
         let par = []
@@ -66,6 +64,9 @@ router.get('/terminalInfo', function (req, res, next) {
           }
           res.send(rm.getSuccessRM('', resultJson))
         })
+      }else{
+          res.send(rm.getFailRM('','fail','暂无门店'))
+
       }
     })
   }
