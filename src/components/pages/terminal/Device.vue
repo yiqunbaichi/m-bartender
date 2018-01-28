@@ -32,7 +32,7 @@
   import { Indicator } from 'mint-ui'
   import { amapManager } from 'vue-amap'
   import * as types from '../../../store/types'
-
+  import { Toast } from 'mint-ui';
   export default {
     components: { },
     data () {
@@ -112,7 +112,11 @@
                 this.markers.push(marker)
               }
             } else {
-              alert(response.data.resultDesc)
+                Toast({
+                    message: response.data.resultDesc,
+                    position: 'bottom',
+                    duration: 5000
+                });
             }
             Indicator.close()
           }).catch(error => {

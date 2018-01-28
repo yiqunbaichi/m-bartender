@@ -2,11 +2,13 @@ import axios from 'axios'
 import store from './store/store'
 import * as types from './store/types'
 import router from './router'
+var config = require('./env.js')
 
 // axios 配置
 axios.defaults.timeout = 5000
-axios.defaults.baseURL = 'https://api.riowine.com'
-// axios.defaults.baseURL = 'http://localhost:8781/'
+// axios.defaults.baseURL = 'https://api.riowine.com'
+axios.defaults.baseURL = config.vue_http_baseURL
+
 
 // http request 拦截器
 axios.interceptors.request.use(

@@ -1,13 +1,14 @@
 var mysql = require('mysql')
+var env = require('../config/env')
 
 var pool = mysql.createPool({
-  connectionLimit: 10,
-  // host: '10.211.55.8',
-  host: '127.0.0.1',
-  user: 'wxapp_com',
-  password: 'wxappcompany',
-  port: '3306',
-  database: 'wxapp_com_db'
+  connectionLimit: env.mysql_connectionLimit,
+  host: env.mysql_host,
+  // host: '127.0.0.1',
+  user: env.mysql_port,
+  password:env.mysql_password,
+  port: env.mysql_port,
+  database: env.mysql_database
 })
 var mysqldb = function (sql, callback) {
   pool.getConnection(function (err, conn) {

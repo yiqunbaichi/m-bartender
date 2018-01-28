@@ -4,7 +4,7 @@ var app = express()
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
 
-var server = app.listen(8781, function () {
+var server = app.listen(8782, function () {
   var host = server.address().address
   var port = server.address().port
   console.log('应用实例，访问地址为 http://%s:%s', host, port)
@@ -26,18 +26,30 @@ app.all('*', function (req, res, next) {
   else next()
 })
 
-// app.use(function (req, res, next) {
-//   var url = req.originalUrl
-//   console.log(url)
-//   if (url '' && !req.session.user) {
-//     return res.send(rm.getErrorVerify())
-//   }
-//   next()
-// })
+app.use(function (req, res, next) {
+  var url = req.originalUrl
+  // console.log(url);
+
+    if (url =='' && !req.session.user) {
+    return res.send(rm.getErrorVerify())
+  }
+  next();
+})
 
 let mbTerminal = require('./router/mbartender/terminal-api')
 let mbGoods = require('./router/mbartender/goods-api')
 app.use('/ws/mbartender/terminalApi', mbTerminal)
 app.use('/ws/mbartender/goodsApi', mbGoods)
+
 let wxappGoods = require('./router/wxapp/goods-api')
+let wxappTrade = require('./router/wxapp/trade-api')
+let wxappMine = require('./router/wxapp/mine-api')
+let wxappSecurity = require('./router/wxapp/security-api')
+let wxappDIY = require('./router/wxapp/DIY-api')
+
 app.use('/ws/wxapp/goodsApi', wxappGoods)
+app.use('/ws/wxapp/tradeApi', wxappTrade)
+app.use('/ws/wxapp/mineApi', wxappMine)
+app.use('/ws/wxapp/securityApi', wxappSecurity)
+app.use('/ws/wxapp/DIYApi', wxappDIY)
+

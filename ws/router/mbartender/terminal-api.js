@@ -15,7 +15,7 @@ var ws_b_config = require('../../config/wsBartenderConfig')
   //   console.log(result);
   //   res.send(result);
   // })
-  // });
+  // });  
 
 router.get('/ttt', function (req, res, next) {
   let id= '10000'
@@ -46,7 +46,7 @@ router.get('/terminalInfo', function (req, res, next) {
       res.send(rm.getSuccessRM('', result))
     })
   } else if (!isNaN(longitude) && !isNaN(latitude)) { // 查询附近终端
-    redisdb.georadius(ws_b_config.tb_bartender_poslist, longitude, latitude, 50, 'km', function (err, result) {
+    redisdb.georadius(ws_b_config.tb_bartender_poslist, longitude, latitude, 5, 'km', function (err, result) {
       if (result.length > 0) {
         let resultJson = []
         let par = []
@@ -65,7 +65,7 @@ router.get('/terminalInfo', function (req, res, next) {
           res.send(rm.getSuccessRM('', resultJson))
         })
       }else{
-          res.send(rm.getFailRM('','fail','暂无门店'))
+          res.send(rm.getFailRM('','暂无门店',''))
 
       }
     })

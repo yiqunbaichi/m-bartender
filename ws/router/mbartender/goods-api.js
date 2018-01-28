@@ -7,7 +7,7 @@ var ws_b_config = require('../../config/wsBartenderConfig')
 
 router.get('/getGoodsList', function (req, res, next) {
   // let terminalId = req.query.terminalId
-  let url = 'http://api.riowine.com:8070/RPCService/webservice/goodsRestApi/getGoodsByGroupId?groupId=0'
+  let url = '/RPCService/webservice/goodsRestApi/getGoodsByGroupId?groupId=0'
   axios.get(url)
     .then(response => {
       if (response.data.resultCode === 200) {

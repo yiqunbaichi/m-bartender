@@ -1,8 +1,12 @@
 // http.js
 var axios = require('axios')
+var env = require('./config/env.js')
 
 // 设置请求baseURL
-axios.defaults.baseURL = 'http://api.riowine.com:8070'
+// axios.defaults.baseURL = 'http://api.riowine.com:8070'
+// axios.defaults.baseURL = 'http://rio.lanever.com:8096'
+axios.defaults.baseURL = env.ws_wxapp_baseURL
+
 // 设置默认请求头
 axios.defaults.headers = {
   'Content-Type': 'application/x-www-form-urlencoded'

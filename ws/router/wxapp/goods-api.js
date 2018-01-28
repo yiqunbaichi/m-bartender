@@ -13,7 +13,6 @@ router.get('/getGoodsList', function (req, res, next) {
         res.send(rm.getFailRM('', JSON.parse(response.data.resultDesc), JSON.parse(response.data.resultValue)))
       }
     }).catch(error => {
-      console.log(error)
       res.send(rm.getFailRM('', '', ''))
     })
 })
