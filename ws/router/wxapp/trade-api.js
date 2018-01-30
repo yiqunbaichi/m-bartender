@@ -35,12 +35,27 @@ router.post('/wxUnifiedorder', function (req, res, next) {
             res.send(rm.getSuccessRM('token invalid',''))
         }
     })
+})
 
 
+router.get('/wxPayOrderQuery', function (req, res, next) {
+            let url = '/RPCService/webservice/wxPayRestApi/wxPayOrderQuery'
 
-
+            axios.get(url,{  params: {
+                out_trade_no: req.query.out_trade_no,
+                memberId:req.query.memberId
+            }
+            }).then(response => {
+                    console.log(response.data)
+                    res.send(response.data)
+                }).catch(error => {
+                console.log(error)
+                res.send(rm.getFailRM('', '', ''))
+            })
 
 })
+
+
 
 
 router.post('/createTradeOrder', function (req, res, next) {
