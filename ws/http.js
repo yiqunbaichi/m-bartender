@@ -9,7 +9,9 @@ axios.defaults.baseURL = env.ws_wxapp_baseURL
 
 // 设置默认请求头
 axios.defaults.headers = {
+  // 'Content-Type': 'multipart/form-data'
   'Content-Type': 'application/x-www-form-urlencoded'
+
 }
 // 发送请求前处理request的数据
 axios.defaults.transformRequest = [function (data) {
@@ -21,4 +23,5 @@ axios.defaults.transformRequest = [function (data) {
 }]
 // 带cookie请求
 axios.defaults.withCredentials = true
+
 module.exports = axios

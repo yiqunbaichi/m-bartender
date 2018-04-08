@@ -46,10 +46,13 @@ let wxappTrade = require('./router/wxapp/trade-api')
 let wxappMine = require('./router/wxapp/mine-api')
 let wxappSecurity = require('./router/wxapp/security-api')
 let wxappDIY = require('./router/wxapp/DIY-api')
+let wxappFace = require('./router/wxapp/face-api')
+
 
 app.use('/ws/wxapp/goodsApi', wxappGoods)
 app.use('/ws/wxapp/tradeApi', wxappTrade)
 app.use('/ws/wxapp/mineApi', wxappMine)
 app.use('/ws/wxapp/securityApi', wxappSecurity)
 app.use('/ws/wxapp/DIYApi', wxappDIY)
+app.use('/ws/wxapp/faceApi', wxappFace)
 

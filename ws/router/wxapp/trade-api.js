@@ -73,7 +73,6 @@ router.post('/createTradeOrder', function (req, res, next) {
           res.send(rm.getFailRM('', response.data.resultDesc, ''))
         }
       }).catch(error => {
-        console.log(error)
         res.send(rm.getFailRM('', '', ''))
       })
 

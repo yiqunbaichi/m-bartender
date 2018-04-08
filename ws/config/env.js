@@ -29,8 +29,15 @@ var env = {
     redis_host : '10.211.55.8',
     // redis_host = '127.0.0.1',
     redis_pwd : 'rd@rio',
-    redis_opts:{}
+    redis_opts:{},
+    upload_file:"/Users/xuwei/work/upload_file/wx_app/mbartender/face",
 
+    ws:{
+        getMemberFaceToken:"/RPCService/webservice/faceRestApi/getMemberFaceToken",
+        uploadMemberFaceToken:"/RPCService/webservice/faceRestApi/uploadMemberFaceToken",
+        addFaceToFaceset:"/RPCService/webservice/faceRestApi/addFaceToFaceset",
+        createDeviceFaceset:"/RPCService/webservice/faceRestApi/createDeviceFaceset"
+    }
 }
 
 module.exports = env

@@ -4,11 +4,12 @@ import store from '../store/store'
 import * as types from '../store/types'
 Vue.use(Router)
 const routes = [
-  {
-    path: '/bartender',
-    name: 'bartender',
-    component: resolve => require(['../components/pages/terminal/Device.vue'], resolve)
-  },
+  // {
+  //   path: '/bartender',
+  //   name: 'bartender',
+  //   // component: resolve => require(['../components/pages/terminal/Device.vue'], resolve)
+  //     component: resolve => require(['../components/pages/goods/list/index.vue'], resolve)
+  // },
   {
     path: '/bartender/pages',
     name: 'pages',
@@ -27,10 +28,15 @@ const routes = [
     }, {
       path: 'mine',
       component: resolve => require(['../components/pages/mine/Mine.vue'], resolve)
+    },{
+        name: 'goods/list',
+        path: 'goods/list',
+        component: resolve => require(['../components/pages/goods/list/index.vue'], resolve)
     }
 
     ]
   }
+
 ]
 if (window.localStorage.getItem('terminal')) {
   store.commit(types.TERMINAL, JSON.parse(window.localStorage.terminal))

@@ -7,7 +7,7 @@ var config = require('./env.js')
 // axios 配置
 axios.defaults.timeout = 5000
 // axios.defaults.baseURL = 'https://api.riowine.com'
-axios.defaults.baseURL = config.vue_http_baseURL
+axios.defaults.baseURL = config.globalData.apiDomain
 
 
 // http request 拦截器

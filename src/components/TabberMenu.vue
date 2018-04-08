@@ -1,18 +1,18 @@
 <template>
 
-
-      <!--<ul class="menu-list">-->
-        <!--<li><router-link to="/index/choice" exact>精选</router-link></li>-->
-        <!--<li><router-link to="/index/shoppingcart" exact>购物车</router-link></li>-->
-        <!--<li><router-link to="/index/mine" exact>我的</router-link></li>-->
-      <!--</ul>-->
   <div class="page-tabbar">
+    <mt-header title="精选" style="    background-color:white;color: black">
+      <router-link to="/" slot="left" >
+        <mt-button icon="back"></mt-button>
+      </router-link>
+    </mt-header>
+
     <div class="page-wrap">
   <mt-tab-container class="page-tabbar-container" v-model="selected">
     <mt-tab-container-item id="精选">
-      <r-choice></r-choice>
+      <r-goods></r-goods>
     </mt-tab-container-item>
-    <mt-tab-container-item id="购物车">
+    <mt-tab-container-item id="DIY">
       <r-sc></r-sc>
     </mt-tab-container-item>
     <mt-tab-container-item id="我的">
@@ -27,10 +27,10 @@
       <img slot="icon" src="../assets/logo.png">
       精选
     </mt-tab-item>
-    <mt-tab-item id="购物车">
+    <mt-tab-item id="DIY">
 
       <img slot="icon" src="../assets/logo.png">
-      发现
+      DIY
     </mt-tab-item>
     <mt-tab-item id="我的">
 
@@ -43,9 +43,12 @@
 </template>
 
 <script>
-  import Choice from './pages/choice/Choice'
-  import SC from './pages/sc/ShoppingCart'
+//  import Choice from './pages/choice/Choice'
+  import Goods from './pages/goods/list/index'
+  import DIY from './pages/sc/ShoppingCart'
   import Mine from './pages/mine/Mine'
+import { Header } from 'mint-ui'
+
   export default {
     name: 'menu',
     data () {
@@ -55,8 +58,9 @@
       }
     },
     components: {
-      'r-choice': Choice,
-      'r-sc': SC,
+//      'r-choice': Choice,
+      'r-goods':Goods,
+      'r-sc': DIY,
       'r-mine': Mine
     }
 
