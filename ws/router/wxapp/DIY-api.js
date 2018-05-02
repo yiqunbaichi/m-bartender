@@ -49,6 +49,13 @@ router.post('/createOrUpdateDiyProduct', function (req, res, next) {
               productObj.productNumber = 'DIY'
               productObj.materialDesc  =desc
               productObj.productDesc = '由'+desc+'组成'
+              productObj.productDesc = req.body.memberId
+              productObj.mWine=req.body.mWine,
+              productObj.sWine=req.body.sWine,
+              productObj.mIngredients=req.body.mIngredients,
+              productObj.sIngredients=req.body.sIngredients,
+              productObj.alcohol=req.body.alcohol,
+              productObj.waters=req.body.waters,
           parameter ={
               memberId: req.body.memberId,
               type:operateType,
