@@ -24,7 +24,7 @@ router.get('/getToken', function (req, res, next) {
         }).then(response => {
             let resData = response.data
             let token = cryptPwd(resData.session_key + '&' + resData.openid)
-            redisdb.set(ws_b_config.tb_js_token + token, JSON.stringify(resData), resData.expires_in, function (err, result) {
+            redisdb.set(ws_b_config.wxapp_tb_js_token + token, JSON.stringify(resData), resData.expires_in, function (err, result) {
                 if (!err) {
                     res.send(rm.getSuccessRM('success', token))
                 }
@@ -48,7 +48,7 @@ router.get('/checkToken', function (req, res, next) {
     if(token== ''||token==undefined){
         res.send(rm.getSuccessRM('token invalid',''))
     }else{
-        redisdb.get(ws_b_config.tb_js_token + token, function (err,result) {
+        redisdb.get(ws_b_config.wxapp_tb_js_token + token, function (err,result) {
             if(result!=null){
                 res.send(rm.getSuccessRM('success',token))
             }else{

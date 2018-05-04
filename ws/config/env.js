@@ -30,6 +30,7 @@ var env = {
     // redis_host = '127.0.0.1',
     redis_pwd : 'rd@rio',
     redis_opts:{},
+    redis_select_db:'2',
     upload_file:"/Users/xuwei/work/upload_file/wx_app/mbartender/face",
 
     ws:{

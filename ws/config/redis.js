@@ -8,7 +8,7 @@ var client = redis.createClient(env.redis_port, env.redis_host, env.redis_opts)
 client.auth(env.redis_pwd, function () {
   console.log('通过认证')
 })
-client.select('4')
+client.select(env.redis_select_db)
 client.on('error', function (err) {
   console.log('Error :', err)
 })

@@ -63,16 +63,21 @@ router.get('/terminalInfo', function (req, res, next) {
     }
 
     if (!isNaN(terminalId)) { // 查询对应的终端
-        redisdb.get(ws_b_config.tb_bartender_detail + terminalId, function (err, result) {
-            res.send(rm.getSuccessRM('', result))
+        redisdb.get(ws_b_config.tb_terminal_detail + terminalId, function (err, result) {
+            if(result!=null){
+                res.send(rm.getSuccessRM('', result))
+            }else{
+                res.send(rm.getFailRM('','终端编号有误',''))
+            }
         })
     } else if (!isNaN(longitude) && !isNaN(latitude)) { // 查询附近终端
-        redisdb.georadius(ws_b_config.tb_bartender_poslist, longitude, latitude, radius, 'km', function (err, result) {
+        redisdb.georadius(ws_b_config.tb_terminal_poslist, longitude, latitude, radius, 'km', function (err, result) {
+
             if (result.length > 0) {
                 let resultJson = []
                 let par = []
                 for (var key in result) {
-                    par.push(ws_b_config.tb_bartender_detail + result[key][0])
+                    par.push(ws_b_config.tb_terminal_detail + result[key][0])
                 }
                 redisdb.mget(par, function (err, mResult) {
                     if (!err) {

@@ -10,7 +10,7 @@ router.post('/wxUnifiedorder', function (req, res, next) {
     let payJson =  req.body.payJson
     let payObj = JSON.parse(payJson)
     let token  =  req.body.token
-    redisdb.get(ws_b_config.tb_js_token + token, function (err,result) {
+    redisdb.get(ws_b_config.wxapp_tb_js_token + token, function (err,result) {
         if(result!=null){
             let url = '/RPCService/webservice/wxPayRestApi/wxUnifiedorder'
             let user  = JSON.parse(result) ;

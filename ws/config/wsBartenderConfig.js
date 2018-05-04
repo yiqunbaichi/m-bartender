@@ -1,10 +1,10 @@
 // bartender
 var ws_b_config = {
-  tb_bartender_list: 'tb_bartender_list:',
-  tb_bartender_detail: 'tb_bartender_detail:',
-  tb_bartender_poslist: 'tb_bartender_poslist',
+    tb_terminal_detail: 'tb_terminal_detail:',
+    tb_terminal_poslist: 'tb_terminal_poslist',
 
-  tb_js_token: 'tb_js_token:'
+  wxapp_tb_js_token: 'wxapp_tb_js_token:'
+
 
 
 }

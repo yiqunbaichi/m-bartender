@@ -9,7 +9,7 @@ router.post('/getMemberInfo', function (req, res, next) {
     let token  =  req.body.token
     let wxUserInfoJson  =  req.body.wxUserInfoJson
 
-    redisdb.get(ws_b_config.tb_js_token + token, function (err,result) {
+    redisdb.get(ws_b_config.wxapp_tb_js_token + token, function (err,result) {
         if(result!=null){
             let url = '/RPCService/webservice/memberRestApi/getMemberInfo'
             let user  = JSON.parse(result) ;
