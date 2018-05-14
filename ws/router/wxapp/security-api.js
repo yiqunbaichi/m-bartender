@@ -16,15 +16,19 @@ router.get('/getToken', function (req, res, next) {
         let url = 'https://api.weixin.qq.com/sns/jscode2session'
         axios.get(url, {
             params: {
-                appid: 'wx297bf44b8d2932c8',
-                secret: '0c8ed1006bfa2395ea3abfb7cef7738e',
+                appid: ws_b_config.appid,
+                secret: ws_b_config.secret,
                 js_code: js_code,
                 grant_type: 'authorization_code'
             }
         }).then(response => {
             let resData = response.data
+            if(resData.errcode!=undefined||resData.errcode!=null){
+                res.send(rm.getFailRM('',resData.errmsg,''))
+                return
+            }
             let token = cryptPwd(resData.session_key + '&' + resData.openid)
-            redisdb.set(ws_b_config.wxapp_tb_js_token + token, JSON.stringify(resData), resData.expires_in, function (err, result) {
+            redisdb.set(ws_b_config.wxapp_tb_js_token + token, JSON.stringify(resData), 3600, function (err, result) {
                 if (!err) {
                     res.send(rm.getSuccessRM('success', token))
                 }

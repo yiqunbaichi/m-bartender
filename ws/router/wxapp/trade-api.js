@@ -58,6 +58,8 @@ router.get('/wxPayOrderQuery', function (req, res, next) {
 
 
 
+
+
 router.post('/createTradeOrder', function (req, res, next) {
     let orderJson =  req.body.orderJson
     let orderTotal = JSON.parse(orderJson)
@@ -144,6 +146,112 @@ router.get('/getOrderByOrderId', function (req, res, next) {
     })
 
 })
+
+
+
+router.get('/sendTemplate', function (req, res, next) {
+    let token  =  req.body.token
+    redisdb.get(ws_b_config.access_token+'_'+ws_b_config.appid + token, function (err,result) {
+        if (result != null) {
+            sendTemplate(result,function (success,sp) {
+                if(success){
+                    res.send(rm.getSuccessRM('','',''))
+
+                }else{
+                    res.send(rm.getFailRM('','',''))
+
+                }
+            })
+
+        }else{
+            //获取token
+            axios.get('https://api.weixin.qq.com/cgi-bin/token', {
+                params: {
+                    grant_type: 'client_credential',
+                    appid: ws_b_config.appid,
+                    secret: ws_b_config.secret,
+                }
+            }).then(response => {
+                let resData = response.data
+                if(resData.errcode!=undefined){
+                        res.send(rm.getFailRM('',resData.errmsg,''))
+                }
+                redisdb.set(ws_b_config.access_token+'_'+ws_b_config.appid ,resData.access_token, 3600, function (err, result) {
+                    if (!err) {
+                        sendTemplate(resData.access_token,function (success,sp) {
+                            if(success){
+                                res.send(rm.getSuccessRM('','',''))
+
+                            }else{
+                                res.send(rm.getFailRM('','',''))
+
+                            }
+                        })
+
+
+
+                    }
+                })
+            }).catch(error => {
+                console.log(error)
+                res.send(rm.getFailRM('', '', ''))
+            })
+        }
+    })
+    // let js_code = req.query.js_code;
+    // if (js_code != undefined && js_code!= null) {
+    //
+    //
+    // } else {
+    //     res.send(rm.getFailRM('','code is null',''))
+    //
+    // }
+
+
+})
+
+function sendTemplate(accessToken,cb) {
+    console.log(accessToken)
+    //获取token
+    axios.post('https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token='+accessToken, {
+        params:
+            {
+                touser: 'oNQs34wBm1XwBeoqtvsdztGZVEV4',
+                template_id: 'mQUVQ5hvpxW-0zEWIUQFy1PLcOZwmYAgiFd3jiN05AM',
+                page: '/page/trade/orderdetail/main?orderId=63152628399078510000067074',
+                form_id: '4200000112201805149777266775',
+                data: {
+                    keyword1: {
+                        value: '63152628399078510000067074'
+                    },
+                    keyword2: {
+                        value: '2017年05月05日 12:30'
+                    },
+                    keyword3: {
+                        value: '杭州一店'
+                    },
+                    keyword4: {
+                        value: '很棒'
+                    }
+                },
+                emphasis_keyword: "keyword1.DATA"
+            }
+
+    }).then(response => {
+        console.log(response.data)
+        if(response.data.errcode=0){
+            cb(true,response.data)
+
+        }else{
+            cb(false,response.data)
+
+        }
+    }).catch(error => {
+        cb(false,error)
+
+    })
+
+}
 
 
 module.exports = router

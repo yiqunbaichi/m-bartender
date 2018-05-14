@@ -11,9 +11,15 @@ router.post('/getMemberInfo', function (req, res, next) {
 
     redisdb.get(ws_b_config.wxapp_tb_js_token + token, function (err,result) {
         if(result!=null){
-            let url = '/RPCService/webservice/memberRestApi/getMemberInfo'
+            let url =''
+            let wxUserInfoObj  = ''
+            if(wxUserInfoJson==undefined){
+                 url = '/RPCService/webservice/memberRestApi/getMemberInfo'
+            }else{
+                 url = '/RPCService/webservice/memberRestApi/updateMemberInfo'
+                wxUserInfoObj  = JSON.parse(wxUserInfoJson) ;
+            }
             let user  = JSON.parse(result) ;
-            let wxUserInfoObj  = JSON.parse(wxUserInfoJson) ;
             let memberInfo  = {
                 wxOpenId: user.openid,
                 nickname: wxUserInfoObj.nickName,
