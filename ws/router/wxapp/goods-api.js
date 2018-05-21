@@ -18,7 +18,7 @@ router.get('/getGoodsList', function (req, res, next) {
 })
 router.get('/getProductListByDeviceId', function (req, res, next) {
     // let terminalId = req.query.terminalId
-    let url = '/RPCService/webservice/goodsRestApi/getProductListByDeviceId?deviceId=42'
+    let url = '/RPCService/webservice/goodsRestApi/getProductListByDeviceId'
     http.get(url,{params: {
         deviceId: req.query.deviceId,
     }
