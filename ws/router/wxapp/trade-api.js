@@ -62,6 +62,7 @@ router.get('/wxPayOrderQuery', function (req, res, next) {
 
 router.post('/createTradeOrder', function (req, res, next) {
     let orderJson =  req.body.orderJson
+
     let orderTotal = JSON.parse(orderJson)
     orderTotal.orderSource = 63
     orderTotal.orderTitle = orderTotal.orderDetailList.productName+orderTotal.orderDetailList.quantity+'杯'

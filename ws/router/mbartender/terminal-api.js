@@ -62,7 +62,7 @@ router.get('/terminalInfo', function (req, res, next) {
         radius = 5
     }
 
-    if (!isNaN(terminalId)) { // 查询对应的终端
+    if (terminalId!=undefined&&terminalId!='') { // 查询对应的终端
         redisdb.get(ws_b_config.tb_terminal_detail + terminalId, function (err, result) {
             if(result!=null){
                 res.send(rm.getSuccessRM('', result))
@@ -70,7 +70,7 @@ router.get('/terminalInfo', function (req, res, next) {
                 res.send(rm.getFailRM('','终端编号有误',''))
             }
         })
-    } else if (!isNaN(longitude) && !isNaN(latitude)) { // 查询附近终端
+    } else if ((longitude!=undefined&&longitude!='')&& (latitude!=undefined&&latitude!='')) { // 查询附近终端
         redisdb.georadius(ws_b_config.tb_terminal_poslist, longitude, latitude, radius, 'km', function (err, result) {
 
             if (result.length > 0) {
