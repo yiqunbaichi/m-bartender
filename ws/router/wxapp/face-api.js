@@ -29,6 +29,7 @@ router.post('/faceDetect', function (req, res, next) {
         }
         var filename = files.file.name
         var memberId = fields.memberId
+        var sourceDeviceId = fields.sourceDeviceId
         var nameArray = filename.split('.');
         var type = nameArray[nameArray.length - 1];
         var avatarName = getNowFormatDate() + '.' + type;
@@ -69,6 +70,7 @@ router.post('/faceDetect', function (req, res, next) {
                     //调用rpc创建用户对应face关系
                     http.post(env.ws.uploadMemberFaceToken, {
                         memberId: memberId,
+                        sourceDeviceId:sourceDeviceId==undefined?'':sourceDeviceId,
                         faceToken: faceData[0].face_token
 
                     })
