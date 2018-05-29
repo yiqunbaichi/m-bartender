@@ -103,10 +103,9 @@ router.get('/getOrderByoperatorId', function (req, res, next) {
                 let list =[]
                     for(var i=0; i<vResult.length; i++)
                     {
-                        vResult[i].orderDetailList=''
+                        // vResult[i].orderDetailList=''
                         vResult[i].operatorId = ''
                         list.push(vResult[i])
-
                     }
 
                 res.send(rm.getSuccessRM('', JSON.stringify(list)))
