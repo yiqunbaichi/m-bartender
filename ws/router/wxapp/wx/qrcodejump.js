@@ -1,11 +1,11 @@
 var express = require('express')
 var router = express.Router()
 
-router.get('/terminal', function (req, res, next) {
-  let terminalId = req.query.terminalId
-    res.send(terminalId)
-
-})
+// router.get('/terminal', function (req, res, next) {
+//   let terminalId = req.query.terminalId
+//     res.send(terminalId)
+//
+// })
 
 router.get('/ZJG7T8OAvE.txt', function (req, res, next) {
     let terminalId = req.query.terminalId
