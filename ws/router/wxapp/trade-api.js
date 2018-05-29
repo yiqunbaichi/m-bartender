@@ -289,7 +289,90 @@ function sendTemplate(accessToken,cb) {
 
     })
 
+
 }
+
+
+function getwxacodeunlimit(accessToken,cb){
+    let postData = {"width":"430","path":"pages/goods/list/main","scene":"42"}
+
+    axios.defaults.headers = {
+        // 'Content-Type': 'multipart/form-data'
+        'content-type': 'application/json; charset=UTF-8'
+    }
+    console.log(accessToken);
+    // //获取token
+    axios.post('https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token='+accessToken,
+       postData ).then(response => {
+            console.log(response.data)
+
+            if(response.data.errcode=0){
+                cb(true,response.data)
+
+            }else{
+                cb(false,response.data)
+
+            }
+        }).catch(error => {
+        cb(false,error)
+        console.log(error)
+
+
+    })
+}
+
+router.get('/getwxacodeunlimit', function (req, res, next) {
+    redisdb.get(ws_b_config.access_token+'_'+ws_b_config.appid , function (err,result) {
+        if (result != null) {
+            getwxacodeunlimit(result,function (success,sp) {
+                if(success){
+                    res.send(rm.getSuccessRM('','',''))
+
+                }else{
+                    res.send(rm.getFailRM('','',''))
+
+                }
+            })
+
+        }else{
+            //获取token
+            axios.get('https://api.weixin.qq.com/cgi-bin/token', {
+                params: {
+                    grant_type: 'client_credential',
+                    appid: ws_b_config.appid,
+                    secret: ws_b_config.secret,
+                }
+            }).then(response => {
+                let resData = response.data
+                if(resData.errcode!=undefined){
+                    res.send(rm.getFailRM('',resData.errmsg,''))
+                }
+                redisdb.set(ws_b_config.access_token+'_'+ws_b_config.appid ,resData.access_token, 3600, function (err, result) {
+                    if (!err) {
+                        getwxacodeunlimit(resData.access_token,function (success,sp) {
+                            if(success){
+                                res.send(rm.getSuccessRM('','',''))
+
+                            }else{
+                                res.send(rm.getFailRM('','',''))
+
+                            }
+                        })
+
+
+
+                    }
+                })
+            }).catch(error => {
+                console.log(error)
+                res.send(rm.getFailRM('', '', ''))
+            })
+        }
+    })
+
+
+
+})
 
 
 module.exports = router
