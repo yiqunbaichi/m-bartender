@@ -52,4 +52,17 @@ router.get('/getProductById', function (req, res, next) {
         res.send(rm.getFailRM('', '', ''))
     })
 })
+
+
+router.get('/getBanners', function (req, res, next) {
+    let imgUrls= [
+        'https://api.riowine.com/upload_file/wx_app/com/banner1.jpg',
+        'https://api.riowine.com/upload_file/wx_app/com/banner2.jpg',
+        'https://api.riowine.com/upload_file/wx_app/com/banner3.jpg'
+    ]
+    res.send(rm.getSuccessRM('', imgUrls))
+
+
+})
+
 module.exports = router
