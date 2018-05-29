@@ -64,7 +64,7 @@ router.post('/faceDetect', function (req, res, next) {
                 } else if (faceData.length >1) {
                     res.send(rm.getFailRM('', '检测到多张人脸', ''))
 
-                } else if (faceData[0].face_token == undefined) {
+                } else if (faceData[0]==undefined||faceData[0].face_token == undefined) {
                     res.send(rm.getFailRM('', '图片非人脸', ''))
                 } else {
                     //调用rpc创建用户对应face关系
