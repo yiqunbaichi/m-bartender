@@ -121,8 +121,7 @@ function getNowFormatDate() {
 
 
 router.get('/getMemberFaceToken', function (req, res, next) {
-    let url = env.ws.getMemberFaceToken
-    http.get(url, {
+    http.get(env.ws.getMemberFaceToken, {
         params: {
             memberId: req.query.memberId
         }

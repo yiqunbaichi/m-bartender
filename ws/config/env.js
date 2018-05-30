@@ -37,7 +37,11 @@ var env = {
         getMemberFaceToken:"/RPCService/webservice/faceRestApi/getMemberFaceToken",
         uploadMemberFaceToken:"/RPCService/webservice/faceRestApi/uploadMemberFaceToken",
         addFaceToFaceset:"/RPCService/webservice/faceRestApi/addFaceToFaceset",
-        createDeviceFaceset:"/RPCService/webservice/faceRestApi/createDeviceFaceset"
+        createDeviceFaceset:"/RPCService/webservice/faceRestApi/createDeviceFaceset",
+        createOrder:"/RPCService/webservice/orderRestApi/createOrder",
+        getOrderByOperatorId:"/RPCService/webservice/orderRestApi/getOrderByOperatorId",
+        getOrderByOrderId:"/RPCService/webservice/orderRestApi/getOrderByOrderId",
+        refundOrder:"/RPCService/webservice/orderRestApi/refundOrder"
     }
 }
 

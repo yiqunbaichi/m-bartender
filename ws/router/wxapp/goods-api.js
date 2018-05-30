@@ -56,9 +56,9 @@ router.get('/getProductById', function (req, res, next) {
 
 router.get('/getBanners', function (req, res, next) {
     let imgUrls= [
-        'https://api.riowine.com/upload_file/wx_app/com/banner1.jpg',
-        'https://api.riowine.com/upload_file/wx_app/com/banner2.jpg',
-        'https://api.riowine.com/upload_file/wx_app/com/banner3.jpg'
+        'https://api.riowine.com/upload_file/wx_app/mbartender/banner/ntj.png',
+        'https://api.riowine.com/upload_file/wx_app/mbartender/banner/mdfy.png',
+        'https://api.riowine.com/upload_file/wx_app/mbartender/banner/ygbf.png'
     ]
     res.send(rm.getSuccessRM('', imgUrls))
 

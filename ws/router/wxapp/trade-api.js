@@ -5,7 +5,7 @@ var rm = require('../../config/resultMessage')
 var redisdb = require('../../config/redis')
 var ws_b_config = require('../../config/wsBartenderConfig')
 var http = require('../../http')
-
+var env = require("../../config/env");
 router.post('/wxUnifiedorder', function (req, res, next) {
     let payJson =  req.body.payJson
     let payObj = JSON.parse(payJson)
@@ -67,8 +67,7 @@ router.post('/createTradeOrder', function (req, res, next) {
     orderTotal.orderSource = 63
     orderTotal.orderTitle = orderTotal.orderDetailList.productName+orderTotal.orderDetailList.quantity+'杯'
     orderTotal.isPayed = 'N'
-    let url = '/RPCService/webservice/orderRestApi/createOrder'
-    http.post(url, {orderTotal:JSON.stringify(orderTotal)})
+    http.post(env.ws.createOrder, {orderTotal:JSON.stringify(orderTotal)})
       .then(response => {
         if (response.data.resultCode === 200) {
           res.send(rm.getSuccessRM('', JSON.parse(response.data.resultValue)))
@@ -91,8 +90,7 @@ router.get('/getOrderByoperatorId', function (req, res, next) {
         start =''
         end =''
     }
-    let url = '/RPCService/webservice/orderRestApi/getOrderByOperatorId'
-    axios.post(url, {operatorId:memberId,
+    axios.post(env.ws.getOrderByOperatorId, {operatorId:memberId,
         start:start,
         end:end
     })
@@ -129,8 +127,7 @@ router.get('/getOrderByOrderId', function (req, res, next) {
         res.send(rm.getFailRM('', '参数有误', ''))
 
     }
-    let url = '/RPCService/webservice/orderRestApi/getOrderByOrderId'
-    axios.post(url, {operatorId:memberId,
+    axios.post(env.ws.getOrderByOrderId, {operatorId:memberId,
         orderId:tradeId
     })
         .then(response => {
@@ -146,6 +143,34 @@ router.get('/getOrderByOrderId', function (req, res, next) {
     })
 
 })
+
+
+
+
+router.post('/refundOrder', function (req, res, next) {
+    let orderId =  req.body.orderId
+    let refundFee =  req.body.refundFee
+    let refundDesc =  req.body.refundDesc
+
+    http.post(env.ws.refundOrder, {
+        orderId:orderId,
+        refundFee:refundFee,
+        refundDesc:refundDesc
+    })
+        .then(response => {
+            console.log(response.data)
+            if (response.data.resultCode == 200) {
+                res.send(rm.getSuccessRM('', response.data.resultValue))
+            } else {
+                res.send(rm.getFailRM('', response.data.resultDesc, ''))
+            }
+        }).catch(error => {
+        res.send(rm.getFailRM('', '', ''))
+    })
+
+})
+
+
 
 
 
