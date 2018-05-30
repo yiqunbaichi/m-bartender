@@ -42,14 +42,13 @@ router.post('/createOrUpdateDiyProduct', function (req, res, next) {
           }
               productObj.memberId = req.body.memberId
               productObj.productName = req.body.productName
-              productObj.price = 0.01
-          let prices = [{"price":0.01,"priceId":0,"productId":0}]
+              productObj.price = 0.1
+          let prices = [{"price":0.1,"priceId":0,"productId":0}]
               productObj.prices = prices
               productObj.materials =   materials
               productObj.productNumber = 'DIY'
               productObj.materialDesc  =desc
               productObj.productDesc = '由'+desc+'组成'
-              productObj.productDesc = req.body.memberId
               productObj.mWine=req.body.mWine,
               productObj.sWine=req.body.sWine,
               productObj.mIngredients=req.body.mIngredients,
