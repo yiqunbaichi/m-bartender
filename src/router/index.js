@@ -36,14 +36,13 @@ const routes = [
 
     ]
   }
-
 ]
 if (window.localStorage.getItem('terminal')) {
   store.commit(types.TERMINAL, JSON.parse(window.localStorage.terminal))
 }
 const router = new Router({
   mode: 'history',
-  linkActiveClass: 'is-active',
+  // linkActiveClass: 'is-active',
   routes
 })
 export default router
