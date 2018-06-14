@@ -8,5 +8,9 @@ var ws_b_config = {
     appid: 'wx58d61b73568eefd3',
     secret: '68d2a7e8a3ff3e24654147f62c06d825',
 
+
+    tb_trade_queue_deviceId:'tb_trade_queue_deviceId:',
+
+
 }
 module.exports = ws_b_config

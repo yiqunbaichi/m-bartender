@@ -25,7 +25,6 @@ router.post('/faceDetect', function (req, res, next) {
     form.parse(req, (err, fields, files) => {
         if (err) {
             res.send(rm.getFailRM('', '', ''))
-
         }
         var filename = files.file.name
         var memberId = fields.memberId

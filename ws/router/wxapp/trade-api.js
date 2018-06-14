@@ -198,6 +198,7 @@ router.get('/sendTemplate', function (req, res, next) {
                 }
             }).then(response => {
                 let resData = response.data
+                console.log(resData)
                 if(resData.errcode!=undefined){
                         res.send(rm.getFailRM('',resData.errmsg,''))
                 }
@@ -236,82 +237,83 @@ router.get('/sendTemplate', function (req, res, next) {
 })
 
 function sendTemplate(accessToken,cb) {
-    console.log(accessToken)
-
-    // return new Promise((resolve, reject) => {
-        let opts = {
-            touser: 'oNQs34wBm1XwBeoqtvsdztGZVEV4',
-            template_id: 'mQUVQ5hvpxW-0zEWIUQFy1PLcOZwmYAgiFd3jiN05AM',
-            page: '/page/trade/orderdetail/main?orderId=63152706146104410000287038',
-            form_id: 'wx23154536889753af7eb5af832901920868',
-            data: {
-                "keyword1": {
-                    "value": "63152628399078510000067074",
-                    "color": "#1d1d1d"
-                },
-                "keyword2": {
-                    "value": "2017年05月05日 12:30",
-                    "color": "#1d1d1d"
-                },
-                "keyword3": {
-                    "value": "杭州一店",
-                    "color": "#1d1d1d"
-                },
-                "keyword4": {
-                    "value": "很棒",
-                    "color": "#1d1d1d"
-                },
-            }
-        }
-
-        console.log(JSON.stringify(opts))
-        // let data = {
-        //     method: 'POST',
-        //     url: 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token='+accessToken,
-        //     body: JSON.stringify(opts),
-        //     header: {
-        //         'content-type': 'application/json' // 默认值
-        //     }
-        // }
-        // url.post(data).then(result => {
-        //     result = JSON.parse(result)
-        //     if (result.errcode == '0' && result.errmsg === 'ok') {
-        //         resolve(result)
-        //     }
-        //     else {
-        //         reject(result)
-        //     }
-        // }).catch(err => {
-        //     reject(err)
-        // })
-    // })
-
-
-
-
-
-    //
-    axios.defaults.headers = {
-        // 'Content-Type': 'multipart/form-data'
-        'Content-Type': 'application/json'
-
-    }
-    // //获取token
-    axios.post('https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token='+accessToken,JSON.stringify(opts)).then(response => {
-        console.log(response.data)
-        if(response.data.errcode=0){
+    axios.get('/RPCService/webservice/wxTemplateApi/sendTemplate', { params: {accessToken:accessToken}})
+        .then(response => {
             cb(true,response.data)
+            // if (response.data.resultCode === 200) {
+            //
+            //
+            //     res.send(rm.getSuccessRM('', JSON.stringify(list)))
+            // } else {
+            //     res.send(rm.getFailRM('', response.data.resultDesc, ''))
+            // }
+        }).catch(error => {
+        cb(false,response.data)
 
-        }else{
-            cb(false,response.data)
-
-        }
-    }).catch(error => {
-        cb(false,error)
-        console.log(error)
-
-
+        // console.log(error)
+        // res.send(rm.getFailRM('', '', ''))
     })
+
+
+    // console.log(accessToken)
+    //
+    //
+    //
+    // // return new Promise((resolve, reject) => {
+    //     let opts = {
+    //         touser: 'oNQs34wBm1XwBeoqtvsdztGZVEV4',
+    //         template_id: 'mQUVQ5hvpxW-0zEWIUQFy1PLcOZwmYAgiFd3jiN05AM',
+    //         page: '/page/trade/orderdetail/main?orderId=63152706146104410000287038',
+    //         form_id: 'wx23154536889753af7eb5af832901920868',
+    //         data: {
+    //             "keyword1": {
+    //                 "value": "63152628399078510000067074",
+    //                 "color": "#1d1d1d"
+    //             },
+    //             "keyword2": {
+    //                 "value": "2017年05月05日 12:30",
+    //                 "color": "#1d1d1d"
+    //             },
+    //             "keyword3": {
+    //                 "value": "杭州一店",
+    //                 "color": "#1d1d1d"
+    //             },
+    //             "keyword4": {
+    //                 "value": "很棒",
+    //                 "color": "#1d1d1d"
+    //             },
+    //         }
+    //     }
+    //
+    //     console.log(JSON.stringify(opts))
+    //
+    //
+    //
+    //
+    //
+    //
+    // //
+    // axios.defaults.headers = {
+    //     // 'Content-Type': 'multipart/form-data'
+    //     'Content-Type': 'application/json'
+    //
+    // }
+    // // //获取token
+    // axios.post('https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token='+accessToken,JSON.stringify(opts)).then(response => {
+    //     console.log(response.data)
+    //     if(response.data.errcode=0){
+    //         cb(true,response.data)
+    //
+    //     }else{
+    //         cb(false,response.data)
+    //
+    //     }
+    // }).catch(error => {
+    //     cb(false,error)
+    //     console.log(error)
+    //
+    //
+    // })
 
 
 }
@@ -397,6 +399,9 @@ router.get('/getwxacodeunlimit', function (req, res, next) {
 
 
 })
+
+
+
 
 
 module.exports = router

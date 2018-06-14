@@ -41,7 +41,12 @@ var env = {
         createOrder:"/RPCService/webservice/orderRestApi/createOrder",
         getOrderByOperatorId:"/RPCService/webservice/orderRestApi/getOrderByOperatorId",
         getOrderByOrderId:"/RPCService/webservice/orderRestApi/getOrderByOrderId",
-        refundOrder:"/RPCService/webservice/orderRestApi/refundOrder"
+        refundOrder:"/RPCService/webservice/orderRestApi/refundOrder",
+
+        pushTradeQueue:"/RPCService/webservice/tradeQueueRestApi/pushTradeQueue",
+        removeTradeFromQueue:"/RPCService/webservice/tradeQueueRestApi/removeTradeFromQueue",
+        getTradeQueue:"/RPCService/webservice/tradeQueueRestApi/getTradeQueue",
+
     }
 }
 

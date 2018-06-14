@@ -47,6 +47,7 @@ let wxappMine = require('./router/wxapp/mine-api')
 let wxappSecurity = require('./router/wxapp/security-api')
 let wxappDIY = require('./router/wxapp/DIY-api')
 let wxappFace = require('./router/wxapp/face-api')
+let tradeQueue = require('./router/wxapp/tradeQueue-api')
 
 
 app.use('/ws/wxapp/goodsApi', wxappGoods)
@@ -55,9 +56,11 @@ app.use('/ws/wxapp/mineApi', wxappMine)
 app.use('/ws/wxapp/securityApi', wxappSecurity)
 app.use('/ws/wxapp/DIYApi', wxappDIY)
 app.use('/ws/wxapp/faceApi', wxappFace)
+app.use('/ws/wxapp/tradeQueueApi', tradeQueue)
 
 
 
 let qrcodejump = require('./router/wxapp/wx/qrcodejump')
 app.use('/riofresh/qrcodejump', qrcodejump)
+
 
